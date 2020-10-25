@@ -19,8 +19,18 @@ VOLUME ["/library", "/config"]
 # pre-reqs for next steps
 RUN apt-get update && apt-get install -y gnupg
 
+
+# ### OLD
+# # sabnzbd
+# RUN apt-get update && apt-get install -y sabnzbdplus unzip 
+
 # sabnzbd
-RUN apt-get update && apt-get install -y sabnzbdplus unzip 
+RUN apt-get update && apt-get install -y software-properties-common
+RUN add-apt-repository multiverse
+RUN add-apt-repository universe
+RUN add-apt-repository ppa:jcfp/nobetas
+RUN add-apt-repository ppa:jcfp/sab-addons
+RUN apt-get update && apt-get install -y sabnzbdplus
 
 # cleanup
 RUN apt-get clean

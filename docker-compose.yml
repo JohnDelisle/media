@@ -1,0 +1,48 @@
+
+
+version: "3.8"
+services:
+    plex:
+        build:
+            context: ./plex
+        ports: 
+            - "32400:32400/tcp"
+            - "3005:3005/tcp"
+            - "8324:8324/tcp"
+            - "32469:32469/tcp"
+            - "1900:1900/udp"
+            - "32410:32410/udp"
+            - "32412:32412/udp"
+            - "32413:32413/udp"
+            - "32414:32414/udp"
+        volumes:
+            - "plex-config:/config"
+            - "library:/library"
+    sabnzbd:
+        build: ./sabnzbd
+        ports:
+            - "8080:8080/tcp"
+        volumes:
+            - "sabnzbd-config:/config"
+            - "library:/library"
+    radarr:
+        build: ./radarr
+        ports:
+            - "7878:7878/tcp"
+        volumes:
+            - "radarr-config:/config"
+            - "library:/library"
+    sonarr:
+        build: ./sonarr
+        ports:
+            - "8989:8989/tcp"
+        volumes:
+            - "sonarr-config:/config"
+            - "library:/library"
+
+volumes:
+    plex-config:
+    sabnzbd-config:
+    radarr-config:
+    sonarr-config:
+    library:
